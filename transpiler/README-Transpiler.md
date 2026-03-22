@@ -24,7 +24,7 @@ The WESL transpiler is configured via `transpiler/wesl/package.json`. Edit the `
 ```json
 {
   "dependencies": {
-    "wesl": "file:../../../tools/packages/wesl"
+    "wesl": "file:../../packages/wesl"
   }
 }
 ```

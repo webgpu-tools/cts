@@ -187,7 +187,7 @@ app.get('/out/**/*.js', async (req, res, next) => {
 // Serve everything else (not .js) as static, and directories as directory listings.
 app.use('/out', serveIndex(path.resolve(srcDir, '../src')));
 app.use('/out', express.static(path.resolve(srcDir, '../src')));
-app.use('/wesl', express.static(path.resolve(srcDir, '../../tools/packages/wesl')));
+app.use('/wesl', express.static(path.resolve(srcDir, '../../packages/wesl')));
 
 void (async () => {
   let host = '127.0.0.1';
