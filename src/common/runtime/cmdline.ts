@@ -171,16 +171,13 @@ Did you remember to build with code coverage instrumentation enabled?`
 dataCache.setStore({
   load: (path: string) => {
     return new Promise<Uint8Array>((resolve, reject) => {
-      sys.readFile(
-        getResourcePath(`cache/${path}`),
-        (err: { message: string }, data: Uint8Array) => {
-          if (err !== null) {
-            reject(err.message);
-          } else {
-            resolve(data);
-          }
+      sys.readFile(getResourcePath(`cache/${path}`), (err, data) => {
+        if (err !== null) {
+          reject(err.message);
+        } else {
+          resolve(data);
         }
-      );
+      });
     });
   },
 });
