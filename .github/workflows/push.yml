@@ -1,5 +1,12 @@
 name: push
 
+# Slimmed down from upstream (gpuweb/cts) for the webgpu-tools fork:
+# runs only the checks that guard our additions in src/common and
+# transpiler/ (node tsc build, typecheck, lint). Upstream's full
+# `npm test` (grunt all: cache gen, standalone/WPT builds, tsdoc) and
+# the gh-pages deploy of the standalone runner are dropped. Revisit
+# this file when an upstream merge touches push.yml.
+
 on:
   workflow_dispatch:
   push:
@@ -21,12 +28,4 @@ jobs:
         with:
           node-version: "16.x"
       - run: npm ci
-      - run: |
-          npm test
-          mkdir deploy-build/
-          cp -r README.md src standalone out out-wpt docs tools deploy-build/
-      - uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          BRANCH: gh-pages
-          FOLDER: deploy-build
-          CLEAN: true
+      - run: npx grunt run:generate-version run:generate-listings-and-webworkers run:build-out-node ts-check run:lint
